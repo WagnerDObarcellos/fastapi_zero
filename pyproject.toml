@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "fastapi-zero"
+version = "0.1.0"
+description = ""
+authors = ["Wagner Diniz <wagner.diniz.barcellos@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = {extras = ["standard"], version = "^0.115.12"}
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.10"
+taskipy = "^1.14.1"
+pytest = "^8.3.5"
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations']
+
+[tool.ruff.lint] 
+preview = true
+select = ['I','F','E','W','PL','PT']
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.taskipy.tasks]
+lint = 'ruff check .'
+pre-format = 'ruff check --fix'
+format = 'ruff format .'
+run = 'fastapi dev fastapi_zero/app.py'
+pre-test = 'task lint'
+test = 'pytest -s -x -vv'
+pos-test = 'coverage html'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
