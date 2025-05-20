@@ -34,6 +34,7 @@ run = 'fastapi dev fastapi_zero/app.py'
 pre-test = 'task lint'
 test = 'pytest -s -x -vv'
 pos-test = 'coverage html'
+zen = 'zen-browser htmlcov/index.html' 
 
 [build-system]
 requires = ["poetry-core"]
